@@ -8,28 +8,24 @@ const mediaItems = [
     title: 'Zari Documentaries',
     description: 'Agricultural documentaries for farmer awareness and education.',
     href: '/documentaries',
-    color: 'bg-agri-green',
   },
   {
     icon: MessageCircle,
     title: 'Advisory Messages',
     description: 'Expert advisory messages for crop management and farming.',
     href: '/advisory-messages',
-    color: 'bg-gray-800',
   },
   {
     icon: Newspaper,
     title: 'Press Releases',
     description: 'Latest press releases and news from the Agriculture Department.',
     href: '/press-releases',
-    color: 'bg-agri-green',
   },
   {
     icon: FileText,
     title: 'Publications',
     description: 'Research publications, reports, and agricultural periodicals.',
     href: '/publication',
-    color: 'bg-gray-800',
   },
 ];
 
@@ -49,27 +45,39 @@ export default function MultimediaSection() {
           </div>
         </AnimateOnScroll>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {mediaItems.map((item, i) => {
             const Icon = item.icon;
+            const isGreen = i % 2 === 0;
             return (
               <AnimateOnScroll key={item.title} animation="scaleUp" delay={i * 100}>
                 <Link
                   href={item.href}
-                  className="group block relative bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 card-hover h-full"
+                  className={`group block rounded-2xl overflow-hidden border hover:shadow-md transition-all duration-300 h-full ${
+                    isGreen
+                      ? 'bg-agri-green border-agri-green'
+                      : 'bg-white border-gray-100'
+                  }`}
                 >
-                  <div className={`${item.color} h-2`} />
                   <div className="p-6">
-                    <div className={`w-14 h-14 ${item.color}/10 rounded-xl flex items-center justify-center mb-4`}>
-                      <Icon size={28} className={`${item.color.replace('bg-', 'text-')}`} />
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+                      isGreen ? 'bg-white/20' : 'bg-agri-green'
+                    }`}>
+                      <Icon size={24} className="text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-agri-green transition">
+                    <h3 className={`text-base font-semibold mb-1.5 transition-colors ${
+                      isGreen ? 'text-white group-hover:text-green-100' : 'text-gray-800 group-hover:text-agri-green'
+                    }`}>
                       {item.title}
                     </h3>
-                    <p className="text-sm text-gray-500 leading-relaxed">
+                    <p className={`text-sm leading-relaxed mb-3 ${
+                      isGreen ? 'text-green-100' : 'text-gray-500'
+                    }`}>
                       {item.description}
                     </p>
-                    <span className="inline-flex items-center gap-1 text-sm font-medium text-agri-green mt-4 group-hover:gap-2 transition-all">
+                    <span className={`inline-flex items-center gap-1.5 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                      isGreen ? 'text-white' : 'text-agri-green'
+                    }`}>
                       View <ArrowRight size={14} />
                     </span>
                   </div>

@@ -1,49 +1,37 @@
-import { ArrowRight, Beaker, Tractor, Droplets, Bug, Sprout, BookOpen } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import AnimateOnScroll from '@/components/ui/AnimateOnScroll';
 
 const services = [
   {
-    icon: Beaker,
     title: 'Agricultural Research',
-    description: 'Research initiatives for crop improvement and agricultural innovation.',
+    description: 'Conducting cutting-edge research in crop improvement, soil health, and agricultural innovation to enhance productivity and sustainability for Punjab farming communities.',
     href: '/services#research',
-    color: 'bg-blue-50 text-blue-600',
   },
   {
-    icon: Tractor,
     title: 'Farm Mechanization',
-    description: 'Modern farming equipment and machinery for enhanced productivity.',
+    description: 'Providing access to modern farming equipment, machinery subsidies, and technical support to boost farm efficiency and reduce manual labor for smallholder farmers.',
     href: '/services#mechanization',
-    color: 'bg-orange-50 text-orange-600',
   },
   {
-    icon: Droplets,
     title: 'On Farm Water Management',
-    description: 'Efficient water usage programs and irrigation management.',
+    description: 'Implementing efficient irrigation systems, water conservation techniques, and drainage solutions to optimize water usage and improve crop yields across the province.',
     href: '/services#water',
-    color: 'bg-cyan-50 text-cyan-600',
   },
   {
-    icon: Sprout,
     title: 'Extension & Adaptive Research',
-    description: 'Technology transfer and farmer training programs.',
+    description: 'Transferring latest agricultural technologies to farmers through training programs, field demonstrations, and advisory services for practical on-farm applications.',
     href: '/services#extension',
-    color: 'bg-green-50 text-green-600',
   },
   {
-    icon: Bug,
     title: 'Pest Warning & Control',
-    description: 'Pest monitoring and quality control of pesticides.',
+    description: 'Operating pest surveillance networks, issuing timely warnings, and ensuring quality control of pesticides to protect crops from disease and insect damage.',
     href: '/services#pest',
-    color: 'bg-red-50 text-red-600',
   },
   {
-    icon: BookOpen,
     title: 'Agricultural Information',
-    description: 'Print, electronic and social media agricultural communications.',
+    description: 'Disseminating agricultural knowledge through print, electronic, and social media channels including publications, documentaries, and farmer awareness campaigns.',
     href: '/services#info',
-    color: 'bg-purple-50 text-purple-600',
   },
 ];
 
@@ -64,30 +52,34 @@ export default function ServicesSection() {
         </AnimateOnScroll>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, i) => {
-            const Icon = service.icon;
-            return (
+          {services.map((service, i) => (
               <AnimateOnScroll key={service.title} animation="fadeUp" delay={i * 100}>
                 <Link
                   href={service.href}
-                  className="block bg-white rounded-xl p-6 shadow-sm border border-gray-100 card-hover group h-full"
+                  className={`group block rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border h-full ${
+                    i % 2 === 0
+                      ? 'bg-agri-green text-white border-agri-green'
+                      : 'bg-white text-gray-800 border-gray-100'
+                  }`}
                 >
-                  <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon size={24} />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2 group-hover:text-agri-green transition">
+                  <h3 className={`text-base font-semibold mb-1.5 transition-colors ${
+                    i % 2 === 0 ? 'text-white group-hover:text-green-100' : 'text-gray-800 group-hover:text-agri-green'
+                  }`}>
                     {service.title}
                   </h3>
-                  <p className="text-sm text-gray-500 mb-4 leading-relaxed">
+                  <p className={`text-sm leading-relaxed mb-4 ${
+                    i % 2 === 0 ? 'text-green-100' : 'text-gray-500'
+                  }`}>
                     {service.description}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-agri-green group-hover:gap-2 transition-all">
+                  <span className={`inline-flex items-center gap-1.5 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                    i % 2 === 0 ? 'text-white' : 'text-agri-green'
+                  }`}>
                     Learn More <ArrowRight size={14} />
                   </span>
                 </Link>
               </AnimateOnScroll>
-            );
-          })}
+            ))}
         </div>
 
         <AnimateOnScroll animation="fadeUp" delay={300}>
